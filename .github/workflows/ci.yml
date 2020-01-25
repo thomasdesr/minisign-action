@@ -8,7 +8,8 @@ on:
 name: CI
 
 jobs:
-  ci:
+  verify:
+    name: "Verify"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,3 +22,23 @@ jobs:
         uses: ./
         with:
           args: -Vm "minisign-0.8.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
+  sign:
+    name: "Sign"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate a test key
+        uses: ./
+        with:
+          args: -G
+      - name: Create test file to sign
+        run: dd if=/dev/urandom bs=4k count=1 of=test-file.bin
+      - name: Sign our test file
+        uses: ./
+        with:
+          args: -Sm test-file.bin
+      - name: Verify the signature still works
+        uses: ./
+        with:
+          args: -Vm test-file.bin
+

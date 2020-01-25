@@ -1,5 +1,12 @@
 name: 'Minisign'
-description: 'Exposes a minisign CLI as a github action'
+description: 'A lightweight wrapper around Minisign to sign and verify artifacts'
+inputs:
+  minisign_key:
+    description: 'contents of a Minisign key (required for signing operations)'
+    required: false
+  password:
+    description: 'password to use with Minisign'
+    required: false
 runs:
   using: 'docker'
   image: 'Dockerfile'

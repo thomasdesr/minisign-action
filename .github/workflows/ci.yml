@@ -22,6 +22,7 @@ jobs:
         uses: ./
         with:
           args: -Vm "minisign-0.8.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
+
   sign:
     name: "Sign"
     runs-on: ubuntu-latest
@@ -42,3 +43,41 @@ jobs:
         with:
           args: -Vm test-file.bin
 
+  sign_with_existing_unencrypted_key:
+      name: "Sign with a pre-existing key fetched from secret"
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Create test file to sign
+          run: dd if=/dev/urandom bs=4k count=1 of=test-file.bin
+        - name: Sign our test file with key from secrets
+          uses: ./
+          with:
+            args: -Sm test-file.bin
+            minisign_key: ${{ secrets.TEST_DATA_NO_PASSWORD_MINISIGN_KEY }}
+        - name: Save a copy of our verification key to disk
+          run: printenv MINISIGN_VERIFICATION_KEY > minisign.pub
+          env:
+            MINISIGN_VERIFICATION_KEY: ${{ secrets.TEST_DATA_NO_PASSWORD_MINISIGN_PUB }}
+        - name: Verify our test file using the verification key we just wrote
+          uses: ./
+          with:
+            args: -Vm test-file.bin
+
+  sign_with_existing_encrypted_key:
+      name: "Sign with a pre-existing key w/ password fetched from secret "
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Create test file to sign
+          run: dd if=/dev/urandom bs=4k count=1 of=test-file.bin
+        - name: Sign our test file with key from secrets
+          uses: ./
+          with:
+            args: -Sm test-file.bin
+            minisign_key: ${{ secrets.TEST_DATA_HAS_PASSWORD_MINISIGN_KEY }}
+            password: ${{ secrets.TEST_DATA_HAS_PASSWORD_PASSWORD }}
+        - name: Verify our test file
+          uses: ./
+          with:
+            args: -Vm test-file.bin -P "${{ secrets.TEST_DATA_HAS_PASSWORD_MINISIGN_PUB_NOHEADER }}"

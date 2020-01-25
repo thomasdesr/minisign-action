@@ -1,5 +1,5 @@
-name: 'Minisign'
-description: 'A lightweight wrapper around Minisign to sign and verify artifacts'
+name: 'minisign-cli'
+description: 'A lightweight wrapper around the Minisign cli to sign and verify artifacts'
 inputs:
   minisign_key:
     description: 'contents of a Minisign key (required for signing operations)'

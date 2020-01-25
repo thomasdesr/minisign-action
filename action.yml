@@ -1,0 +1,5 @@
+name: 'Minisign'
+description: 'Exposes a minisign CLI as a github action'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

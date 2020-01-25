@@ -1,0 +1,23 @@
+on:
+  # On push/pr & weekly
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 23 * * 0"
+
+name: CI
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: fetch minsign 0.8 release
+        run: |
+          wget \
+            https://github.com/jedisct1/minisign/releases/download/0.8/minisign-0.8.tar.gz \
+            https://github.com/jedisct1/minisign/releases/download/0.8/minisign-0.8.tar.gz.minisig
+      - name: verify minisign 0.8 release
+        uses: ./
+        with:
+          args: -Vm "minisign-0.8.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"

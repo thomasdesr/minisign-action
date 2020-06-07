@@ -2,7 +2,7 @@ FROM ubuntu:18.04 AS build
 
 # We're pulling a specific tag/commit because minisign hasn't been released in a
 # long time and we want to build a static artifact.
-ENV TAG="dfb9963ce764b4b0d104ca52884c454cb332ef62"
+ENV TAG="0.9"
 
 # Setup Deps
 RUN apt-get update && \

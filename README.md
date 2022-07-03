@@ -43,7 +43,7 @@ steps:
         https://github.com/jedisct1/minisign/releases/download/0.8/minisign-0.8.tar.gz \
         https://github.com/jedisct1/minisign/releases/download/0.8/minisign-0.8.tar.gz.minisig
   - name: Verify artifact's integrity with their published key
-    uses: thomaso-mirodin/minisign-action@v1
+    uses: thomasdesr/minisign-action@v1
     with:
       args: -Vm "minisign-0.8.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
 ```
@@ -52,7 +52,7 @@ steps:
 ```yaml
 steps:
     - name: Sign our test file
-      uses: thomaso-mirodin/minisign-action@v1
+      uses: thomasdesr/minisign-action@v1
       with:
         args: -Sm path/to/artifact
         minisign_key: ${{ secrets.minisign_key }}

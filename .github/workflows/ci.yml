@@ -8,6 +8,15 @@ on:
 name: CI
 
 jobs:
+  verify_container_signatures:
+    name: "Verify upstream container's published signature matches"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: sigstore/cosign-installer@main
+      - run: |
+          cosign verify --key ./minisign-container-cosign.pub jedisct1/minisign@sha256:fab787053d0c6f600eb86344add051927caa729f1f73ebaba4aa42e0e7402609
+
   verify:
     name: "Verify"
     runs-on: ubuntu-latest

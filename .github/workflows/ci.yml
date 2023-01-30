@@ -22,15 +22,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: fetch minsign 0.10 release
+      - name: fetch minsign 0.11 release
         run: |
           wget \
-            https://github.com/jedisct1/minisign/archive/refs/tags/0.10.tar.gz \
-            https://github.com/jedisct1/minisign/releases/download/0.10/0.10.tar.gz.minisig
-      - name: verify minisign 0.10 release
+            https://github.com/jedisct1/minisign/archive/refs/tags/0.11.tar.gz \
+            https://github.com/jedisct1/minisign/releases/download/0.11/0.11.tar.gz.minisig
+      - name: verify minisign 0.11 release
         uses: ./
         with:
-          args: -Vm "0.10.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
+          args: -Vm "0.11.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
 
   sign:
     name: "Sign"

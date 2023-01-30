@@ -30,7 +30,7 @@ jobs:
       - name: verify minisign 0.11 release
         uses: ./
         with:
-          args: -Vm "0.11.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
+          args: -Vm "minisign-0.11.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
 
   sign:
     name: "Sign"

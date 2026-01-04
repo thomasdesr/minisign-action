@@ -15,22 +15,22 @@ jobs:
       - uses: actions/checkout@v2
       - uses: sigstore/cosign-installer@main
       - run: |
-          cosign verify --key ./minisign-container-cosign.pub jedisct1/minisign@sha256:1326ddb799bdd117b802d19498ccfedf3987104f646a987e6d7f7652dc8ca201
+          cosign verify --key ./minisign-container-cosign.pub jedisct1/minisign@sha256:ee60186c5d05e342e66cbc81133aa744d026752d909d8ea021a15c4d16b1193b
 
   verify:
     name: "Verify"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: fetch minsign 0.11 release
+      - name: fetch minsign 0.12 release
         run: |
           wget \
-            https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11.tar.gz \
-            https://github.com/jedisct1/minisign/releases/download/0.11/minisign-0.11.tar.gz.minisig
-      - name: verify minisign 0.11 release
+            https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12.tar.gz \
+            https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12.tar.gz.minisig
+      - name: verify minisign 0.12 release
         uses: ./
         with:
-          args: -Vm "minisign-0.11.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
+          args: -Vm "minisign-0.12.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
 
   sign:
     name: "Sign"

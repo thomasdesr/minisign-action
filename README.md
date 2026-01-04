@@ -40,12 +40,12 @@ steps:
   - name: Fetch "third-party" artifact
     run: |
       wget \
-        https://github.com/jedisct1/minisign/releases/download/0.8/minisign-0.8.tar.gz \
-        https://github.com/jedisct1/minisign/releases/download/0.8/minisign-0.8.tar.gz.minisig
+        https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12.tar.gz \
+        https://github.com/jedisct1/minisign/releases/download/0.12/minisign-0.12.tar.gz.minisig
   - name: Verify artifact's integrity with their published key
     uses: thomasdesr/minisign-action@v1
     with:
-      args: -Vm "minisign-0.8.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
+        args: -Vm "minisign-0.12.tar.gz" -P "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3"
 ```
 
 ### Signing
